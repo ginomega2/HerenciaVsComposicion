@@ -1,40 +1,35 @@
 package Vehiculos;
 
-public class EstereoSony implements Estereo {
-
-
-
+public class EstereoAiwa implements Estereo {
     @Override
     public void subirVolumen() {
-        System.out.println("sony +");
 
+        System.out.println("aiwa +");
     }
 
     @Override
     public void bajarVolumen() {
-        System.out.println("sony -");
+        System.out.println("aiwa -");
     }
 
     @Override
     public void prender() {
-        System.out.println("sony on");
-
+        System.out.println("aiwa on");
     }
 
     @Override
     public void apagar() {
-        System.out.println("sony ff");
-
+        System.out.println("aiwa off");
     }
 
     @Override
     public void siguiente() {
-        System.out.println("sony >>");
+        System.out.println("aiwa >>");
 
     }
 
     @Override
     public void anterior() {
-        System.out.println("sony <<");
+        System.out.println("aiwa <<");
     }
 }
