@@ -15,7 +15,7 @@ public class runner {
         Nodo nodo3 = new Nodo(30);
         Nodo nodo4 = new Nodo(40);
         Nodo nodo5 = new Nodo(50);
-        lista.agregarOrdenado(nodo3);
+        lista.agregarOrdenado(nodo1);
         lista.listarTodo();
         System.out.println("*************************");
         lista.agregarOrdenado(nodo5);
@@ -24,7 +24,7 @@ public class runner {
         lista.agregarOrdenado(nodo2);
         lista.listarTodo();
         System.out.println("*************************");
-        lista.agregarOrdenado(nodo1);
+        lista.agregarOrdenado(nodo3);
         lista.listarTodo();
         System.out.println("*************************");
         lista.agregarOrdenado(nodo4);

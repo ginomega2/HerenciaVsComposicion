@@ -14,6 +14,11 @@ public class Lista {
         return numReg;
     }
 
+    /***
+     * Metodo para buscar un elemento en la lista no debe haber repetidos
+     * @param datoBuscado Elemento a buscar
+     * @return si existe retorna el objeto encontrado, retorna null si no existe
+     */
     public Nodo bucarDato(int datoBuscado){
         Nodo buscador=primero;
         boolean fueEncontrado=false;
@@ -22,9 +27,13 @@ public class Lista {
                 buscador=buscador.siguiente;
             else
                 fueEncontrado=true;
+
         return fueEncontrado ? buscador:null;
     }
 
+    /***
+     * Metodo para mostrar todo el contenido de la lista
+     */
     public void listarTodo(){
         actual=primero;
         while (actual!=null) {
@@ -54,31 +63,42 @@ public class Lista {
     }
 
 
+    /***
+     * Inserta un registro en la lista de manera ordenada
+     * @param nodoNuevo El registro que hay que insertar como nodo
+     */
     public void agregarOrdenado(Nodo nodoNuevo){
 
-        if(bucarDato(nodoNuevo.getDato())==null) {
-            Nodo Temp, busqueda;
-            Temp = nodoNuevo;
-            Temp.siguiente = null;
 
-            busqueda = primero;
-            if (busqueda == null) {
-                primero = Temp;
-            } else {
+        if(bucarDato(nodoNuevo.getDato())==null) { // si el dato no se encuentra en la lista precedemos a insertarlo
+            Nodo Temp, busqueda;
+            Temp = nodoNuevo;   //Se crea el nodo nuevo y almacenamos la informacion de manera temporal y
+            Temp.siguiente = null;// la liga la ponemos en nulo
+
+            busqueda = primero;     // comenzamos la busqueda y nos situamos en el priemr elemento
+            if (busqueda == null) { // si la busqueda es nula la lista esta vacia
+                primero = Temp;     //el primero elemento sera lo que almacenampos de forma  temporal
+            }
+            else
+            {                //en caso de si haber elementos en la lista continuamos la busqueda
                 boolean hallado = false;
-                while (busqueda != null && !hallado)
+                while (busqueda != null && !hallado)//buscamos hasta que estemos a punto de ir demasiado lejos (hallado)
+                                                    // o hasta que la lista se acaba
                     if (busqueda.getDato() < nodoNuevo.getDato()) {
                         ultimo = busqueda;
                         busqueda = busqueda.siguiente;
                     } else
                         hallado = true;
-                Temp.siguiente = busqueda;
-                if (busqueda == primero)
-                    primero = Temp;
+
+                Temp.siguiente = busqueda;  // hacemos que el registro temporal nuevo apunte al de busqueda
+                if (busqueda == primero)    // si el registro nuevo va a ser el primer registro se pone el
+                    primero = Temp;         // primero con los datos nuevos temporales
                 else
-                    ultimo.siguiente = Temp;
+                    ultimo.siguiente = Temp;// en caso contrario se hace que el ultimo registro apunte al nuevo temporal
             }
-        }else System.out.println("dato ya existe");
+        }
+        else // en caso de que buscar dato si lo encuentre
+            System.out.println("dato ya existe");
     }
 
     /***

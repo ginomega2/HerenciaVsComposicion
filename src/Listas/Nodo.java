@@ -15,4 +15,12 @@ public class Nodo {
         this.dato = dato;
     }
     Nodo siguiente;
+
+    @Override
+    public String toString() {
+        return "Nodo{" +
+                "dato=" + dato +
+                ", siguiente=" + siguiente +
+                '}';
+    }
 }
