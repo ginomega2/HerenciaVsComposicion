@@ -97,7 +97,7 @@ public class Lista {
                     ultimo.siguiente = Temp;// en caso contrario se hace que el ultimo registro apunte al nuevo temporal
             }
         }
-        else { // en caso de que buscar dato si lo encuentre
+        else { // en caso de que buscar dato si lo encuentre modificamos el nodo con la nueva informacin es decir la actualizamos excepto el ID
             System.out.println("dato ya existe nombre " +elNodo.dato.getId());
             System.out.println("dato ya existe nombre " +elNodo.dato.getNombre());
             System.out.println("dato ya existe saldo " +elNodo.dato.getSaldo());
