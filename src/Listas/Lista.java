@@ -23,7 +23,7 @@ public class Lista {
         Nodo buscador=primero;
         boolean fueEncontrado=false;
         while (buscador!=null && ! fueEncontrado)
-            if(buscador.getDato()!=datoBuscado)
+            if(buscador.dato.getId()!=datoBuscado)
                 buscador=buscador.siguiente;
             else
                 fueEncontrado=true;
@@ -37,7 +37,7 @@ public class Lista {
     public void listarTodo(){
         actual=primero;
         while (actual!=null) {
-            System.out.println("el dato " + actual.getDato());
+            System.out.println("id " + actual.getDato().getId()+" nombre " + actual.getDato().getNombre()+" saldo " + actual.getDato().getSaldo());
             actual = actual.siguiente;
         }
     }
@@ -69,8 +69,8 @@ public class Lista {
      */
     public void agregarOrdenado(Nodo nodoNuevo){
 
-
-        if(bucarDato(nodoNuevo.getDato())==null) { // si el dato no se encuentra en la lista precedemos a insertarlo
+        Nodo elNodo=bucarDato(nodoNuevo.getDato().getId());
+        if(elNodo==null) { // si el dato no se encuentra en la lista precedemos a insertarlo
             Nodo Temp, busqueda;
             Temp = nodoNuevo;   //Se crea el nodo nuevo y almacenamos la informacion de manera temporal y
             Temp.siguiente = null;// la liga la ponemos en nulo
@@ -84,7 +84,7 @@ public class Lista {
                 boolean hallado = false;
                 while (busqueda != null && !hallado)//buscamos hasta que estemos a punto de ir demasiado lejos (hallado)
                                                     // o hasta que la lista se acaba
-                    if (busqueda.getDato() < nodoNuevo.getDato()) {
+                    if (busqueda.getDato().getId() < nodoNuevo.getDato().getId()) {
                         ultimo = busqueda;
                         busqueda = busqueda.siguiente;
                     } else
@@ -97,8 +97,17 @@ public class Lista {
                     ultimo.siguiente = Temp;// en caso contrario se hace que el ultimo registro apunte al nuevo temporal
             }
         }
-        else // en caso de que buscar dato si lo encuentre
-            System.out.println("dato ya existe");
+        else { // en caso de que buscar dato si lo encuentre
+            System.out.println("dato ya existe nombre " +elNodo.dato.getId());
+            System.out.println("dato ya existe nombre " +elNodo.dato.getNombre());
+            System.out.println("dato ya existe saldo " +elNodo.dato.getSaldo());
+            elNodo.dato.setNombre(nodoNuevo.dato.getNombre());
+            elNodo.dato.setSaldo(nodoNuevo.dato.getSaldo());
+            System.out.println("nuevo nombre " +elNodo.dato.getNombre());
+            System.out.println("nuevo saldo " +elNodo.dato.getSaldo());
+            System.out.println("mismo ID  " +elNodo.dato.getId());
+
+        }
     }
 
     /***
@@ -116,7 +125,7 @@ public class Lista {
         boolean  hallado=false;
         if(primero==null)
             estado=Estado.LISTA_VACIA;
-        else if (datoPoBorrar==primero.getDato()){
+        else if (datoPoBorrar==primero.getDato().getId()){
             estado=Estado.BORRADO_CON_EXITO;
             temp=primero;
             primero=primero.siguiente;
@@ -125,7 +134,7 @@ public class Lista {
             hallado=false;
             busqueda=primero;
             while (busqueda.siguiente!=null && !hallado)
-                if (busqueda.siguiente.getDato()!=datoPoBorrar)
+                if (busqueda.siguiente.getDato().getId()!=datoPoBorrar)
                     busqueda=busqueda.siguiente;
             else
                 hallado=true;

@@ -1,26 +1,31 @@
 package Listas;
 
 public class Nodo {
-    private int dato;
 
-    public Nodo(int dato) {
+    protected Cliente dato;
+
+    public Nodo(Cliente dato) {
         this.dato = dato;
+        siguiente=null;
     }
 
-    public int getDato() {
+    public Cliente getDato() {
         return dato;
     }
 
-    public void setDato(int dato) {
+    public void setDato(Cliente dato) {
         this.dato = dato;
     }
+
+    public Nodo getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Nodo siguiente) {
+        this.siguiente = siguiente;
+    }
+
     Nodo siguiente;
 
-    @Override
-    public String toString() {
-        return "Nodo{" +
-                "dato=" + dato +
-                ", siguiente=" + siguiente +
-                '}';
-    }
+
 }
