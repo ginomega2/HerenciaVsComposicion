@@ -4,7 +4,47 @@ public class Lista {
     int numReg=0;
 
     Nodo primero, ultimo, actual;
+    TipoInsercion tipoInsercion = TipoInsercion.INSERCION_ASC;
 
+
+    public Nodo bucarDatoRecursivo(Nodo nodo, int i) {
+        if (nodo!=null)
+            if(nodo.dato.getId()==i)
+                return nodo;
+            else
+                nodo= bucarDatoRecursivo(nodo.siguiente,i);
+
+        return nodo;
+    }
+    public void listarRecursivoAscendente(Nodo nodo){
+        if (nodo!=null){
+            System.out.printf("id: %d , nombre: %s , saldo: %.2f %n",nodo.dato.getId(),nodo.dato.getNombre(),nodo.dato.getSaldo());
+            listarRecursivoAscendente(nodo.siguiente);
+        }
+    }
+
+    public void llamarRecursivo(){
+        System.out.println("llamada a recursivo en orden ascendente");
+        listarRecursivoAscendente(primero);
+        System.out.println("llamada a recursivo en orden descendente");
+        listarRecursivoDescendente(primero);
+
+    }
+
+    public void listarRecursivoDescendente(Nodo nodo) {
+        if (nodo!=null){
+            listarRecursivoDescendente(nodo.siguiente);
+            System.out.printf("id: %d , nombre: %s , saldo: %.2f %n",nodo.dato.getId(),nodo.dato.getNombre(),nodo.dato.getSaldo());
+        }
+    }
+
+
+
+    public Lista(TipoInsercion tipoInsercion) {
+        this.tipoInsercion=tipoInsercion;
+        primero=ultimo=actual=null;
+        numReg=0;
+    }
     public Lista() {
         primero=ultimo=actual=null;
         numReg=0;
@@ -70,7 +110,9 @@ public class Lista {
     public void agregarOrdenado(Nodo nodoNuevo){
 
         Nodo elNodo=bucarDato(nodoNuevo.getDato().getId());
+
         if(elNodo==null) { // si el dato no se encuentra en la lista precedemos a insertarlo
+            numReg++;
             Nodo Temp, busqueda;
             Temp = nodoNuevo;   //Se crea el nodo nuevo y almacenamos la informacion de manera temporal y
             Temp.siguiente = null;// la liga la ponemos en nulo
@@ -82,13 +124,30 @@ public class Lista {
             else
             {                //en caso de si haber elementos en la lista continuamos la busqueda
                 boolean hallado = false;
+
                 while (busqueda != null && !hallado)//buscamos hasta que estemos a punto de ir demasiado lejos (hallado)
-                                                    // o hasta que la lista se acaba
-                    if (busqueda.getDato().getId() < nodoNuevo.getDato().getId()) {
-                        ultimo = busqueda;
-                        busqueda = busqueda.siguiente;
-                    } else
-                        hallado = true;
+                    // o hasta que la lista se acaba
+                    switch (tipoInsercion){// CODIGO AGREGADO PARA QUE LAS INSERCIONES SE HAGAN DE FORMA ASCENDENTE O DESCENDENTE
+                        case INSERCION_ASC :
+                            if (busqueda.getDato().getId() < nodoNuevo.getDato().getId()){
+                                ultimo = busqueda;
+                                busqueda = busqueda.siguiente;
+                            } else
+                                hallado = true;
+                            break;
+                        case INSERCION_DSC:
+                            if (busqueda.getDato().getId() > nodoNuevo.getDato().getId()){
+                                ultimo = busqueda;
+                                busqueda = busqueda.siguiente;
+                            } else
+                                hallado = true;
+                            break;
+                    }
+//                    if (busqueda.getDato().getId() < nodoNuevo.getDato().getId()){
+//                        ultimo = busqueda;
+//                        busqueda = busqueda.siguiente;
+//                    } else
+//                        hallado = true;
 
                 Temp.siguiente = busqueda;  // hacemos que el registro temporal nuevo apunte al de busqueda
                 if (busqueda == primero)    // si el registro nuevo va a ser el primer registro se pone el
@@ -98,7 +157,7 @@ public class Lista {
             }
         }
         else { // en caso de que buscar dato si lo encuentre modificamos el nodo con la nueva informacin es decir la actualizamos excepto el ID
-            System.out.println("dato ya existe nombre " +elNodo.dato.getId());
+            System.out.println("dato ya existe id " +elNodo.dato.getId());
             System.out.println("dato ya existe nombre " +elNodo.dato.getNombre());
             System.out.println("dato ya existe saldo " +elNodo.dato.getSaldo());
             elNodo.dato.setNombre(nodoNuevo.dato.getNombre());
@@ -151,5 +210,6 @@ public class Lista {
         }
         return estado;
     }
+
 
 }
