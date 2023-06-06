@@ -9,6 +9,7 @@ public class RunnerRecursivo {
         lista.agregarOrdenado(new Nodo(new Cliente(301,"el 301",301.301)));
         lista.agregarOrdenado(new Nodo(new Cliente(501,"el 501",501.501)));
         lista.listarTodo();
+        System.out.println("total de registros "+lista.numReg);
 
 //        lista.llamarRecursivo();
         System.out.println("LISTADO Recursivo Ascendente ");

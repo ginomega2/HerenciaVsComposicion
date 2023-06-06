@@ -205,6 +205,7 @@ public class Lista {
                 temp=busqueda.siguiente;
                 busqueda.siguiente=busqueda.siguiente.siguiente;
                 temp=null;
+                numReg--;
             }
 
         }
