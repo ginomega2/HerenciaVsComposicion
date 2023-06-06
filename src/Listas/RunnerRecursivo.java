@@ -2,7 +2,7 @@ package Listas;
 
 public class RunnerRecursivo {
     public static void main(String[] args) {
-        Lista lista = new Lista(TipoInsercion.INSERCION_DSC);
+        Lista lista = new Lista(TipoInsercion.INSERCION_ASC);
         lista.agregarOrdenado(new Nodo(new Cliente(701,"el 701",701.701)));
         lista.agregarOrdenado(new Nodo(new Cliente(101,"el 101",101.101)));
         lista.agregarOrdenado(new Nodo(new Cliente(401,"el 401",401.401)));
@@ -24,6 +24,19 @@ public class RunnerRecursivo {
         else {
             System.out.println("no encontrado");
         }
+
+        int lugar= lista.indexOf(401);
+        System.out.println("indice del 401 "+lugar);
+
+        System.out.println("LISTADO Recursivo Ascendente ");
+        lista.listarRecursivoAscendente(lista.primero);
+
+        Nodo elNodo=lista.getAtIndex(4);
+
+        System.out.printf(" get at index 0 id: %d, nombre: %s, saldo: %.2f %n",
+                elNodo.dato.getId(),elNodo.dato.getNombre(),elNodo.dato.getSaldo());
+
+
 
     }
 }

@@ -6,6 +6,67 @@ public class Lista {
     Nodo primero, ultimo, actual;
     TipoInsercion tipoInsercion = TipoInsercion.INSERCION_ASC;
 
+    public int indexOf(int id){
+        int indice=0;
+        Nodo buscador = primero;
+        while (buscador!=null){
+            if(buscador.dato.getId()==id)return indice;
+            buscador = buscador.siguiente;
+            indice++;
+        }
+        return -1;
+    }
+
+    public int indexOfEsMayorA(int id){
+        int indice=0;
+        Nodo buscador = primero;
+        while (buscador!=null){
+            if(buscador.dato.getId()>id)return indice;
+            buscador = buscador.siguiente;
+            indice++;
+        }
+        return -1;
+    }
+
+    public Nodo getAtIndex(int indice){
+        if(indice<=numReg){
+             Nodo nodo=primero;
+             for (int x=0;x<indice;x++){
+                 nodo=nodo.siguiente;
+             }
+            return nodo;
+        }else return null;
+
+
+    }
+
+    public Estado insertarConIndicd(Nodo nodo){
+        Estado estado = Estado.LISTA_VACIA;
+        Nodo miNodo;
+        miNodo=bucarDato(nodo.dato.getId());
+
+        if (primero==null){
+            primero=ultimo=nodo;
+        }else if(miNodo==null){
+            int indiceMayor=indexOfEsMayorA(nodo.dato.getId());
+            Nodo tempMayor=getAtIndex(indiceMayor);
+            Nodo tempMenor=getAtIndex(indiceMayor-1);
+            if(tempMenor!=null){
+                tempMenor.siguiente=nodo;
+                nodo.siguiente=tempMayor;
+                estado=Estado.INSERTADO_OK;
+            }else {
+                nodo.siguiente=tempMayor;
+                estado=Estado.INSERTADO_OK;
+
+            }
+
+        }
+
+
+        return estado;
+    }
+
 
     public Nodo bucarDatoRecursivo(Nodo nodo, int i) {
         if (nodo!=null)
